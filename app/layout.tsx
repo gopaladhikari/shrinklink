@@ -25,11 +25,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: "ShrinkLink - Shorten Your URLs",
     description: "Shorten, share, and track your links with ShrinkLink.",
-    url: "https://shrinklink.vercel.app",
+    url: "https://shrinklink-orcin.vercel.app",
     siteName: "ShrinkLink",
     images: [
       {
-        url: "https://shrinklink.vercel.app/og-image.jpg",
+        url: "https://shrinklink-orcin.vercel.app/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "ShrinkLink - URL Shortener",
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "ShrinkLink - Shorten Your URLs",
     description: "A minimal, fast URL shortener built with Next.js.",
-    images: ["https://shrinklink.vercel.app/og-image.jpg"],
+    images: ["https://shrinklink-orcin.vercel.app/og-image.jpg"],
     creator: "@gopuadks",
   },
 
