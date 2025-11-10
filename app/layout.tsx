@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+
 import "./globals.css";
+import { Providers } from "./providers";
 
 export const metadata: Metadata = {
   title: {
@@ -55,9 +57,6 @@ export const metadata: Metadata = {
 
   // Manifest (PWA support - optional)
   manifest: "/site.webmanifest",
-
-  // Theme Color
-  viewport: "width=device-width, initial-scale=1",
 };
 
 export default function RootLayout({
@@ -68,7 +67,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning className="antialiased">
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

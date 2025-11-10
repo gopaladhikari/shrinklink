@@ -1,7 +1,9 @@
+import { Button } from "@heroui/button";
+
 export default function Page() {
   return (
-    <main>
-      <h1>PagePage</h1>
-    </main>
+    <div>
+      <Button>Click me</Button>
+    </div>
   );
 }
