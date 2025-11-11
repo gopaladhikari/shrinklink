@@ -1,9 +1,9 @@
-import { Button } from "@heroui/button";
+import { HeroSection } from "@/components/hero-section";
 
 export default function Page() {
   return (
-    <div>
-      <Button>Click me</Button>
-    </div>
+    <main>
+      <HeroSection />
+    </main>
   );
 }
