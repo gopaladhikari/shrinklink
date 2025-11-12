@@ -16,6 +16,7 @@ import {
 } from "@heroui/react";
 import { Icon } from "@iconify/react";
 import { cn } from "@heroui/react";
+import { Logo } from "./logo";
 
 export function Menu(props: NavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -24,10 +25,10 @@ export function Menu(props: NavbarProps) {
     <Navbar
       {...props}
       classNames={{
-        base: cn("border-default-500", {
+        base: cn("border-default-400 border-b-1", {
           "bg-default-200/50 dark:bg-default-100/50": isMenuOpen,
         }),
-        wrapper: "justify-center",
+        wrapper: "max-w-7xl mx-auto",
         item: "hidden md:flex",
       }}
       height="60px"
@@ -37,7 +38,7 @@ export function Menu(props: NavbarProps) {
       {/* Left Content */}
       <NavbarBrand>
         <Link href="/" size="lg" className="px-2">
-          Shrinklink
+          <Logo />
         </Link>
       </NavbarBrand>
 

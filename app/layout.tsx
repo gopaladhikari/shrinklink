@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "./providers";
 import { Menu } from "@/components/navbar";
+import { Footer } from "@/components/footer";
 
 export const metadata: Metadata = {
   title: {
@@ -71,6 +72,7 @@ export default function RootLayout({
         <Providers>
           <Menu />
           {children}
+          <Footer />
         </Providers>
       </body>
     </html>
