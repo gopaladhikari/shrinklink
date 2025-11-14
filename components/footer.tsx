@@ -1,40 +1,27 @@
 "use client";
 
 import { useState, FormEvent } from "react";
-import { Input, Button, Link, Divider } from "@heroui/react";
+import { Input, Button, Link, Divider, Form } from "@heroui/react";
 import { Icon } from "@iconify/react";
 import { Logo } from "./logo";
 
-function validateEmail(v: string) {
-  return /[^@\s]+@[^@\s]+\.[^@\s]+/.test(v);
-}
-
 export function Footer() {
-  const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError("");
-    setSuccess("");
 
-    if (!email.trim()) {
-      setError("Email is required");
-      return;
-    }
-    if (!validateEmail(email)) {
-      setError("Enter a valid email address");
-      return;
-    }
+    const { email } = Object.fromEntries(new FormData(e.currentTarget));
+
+    console.log(email);
 
     try {
       setLoading(true);
       await new Promise((r) => setTimeout(r, 900));
       setSuccess("Thanks for subscribing! Check your inbox to confirm.");
-      setEmail("");
-    } catch (_) {
+    } catch (error) {
       setError("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
@@ -52,22 +39,25 @@ export function Footer() {
             </p>
             <div className="flex items-center gap-4">
               <Link
-                href="#"
+                href="https://x.com/gopuadks"
                 aria-label="Twitter"
+                target="_blank"
                 className="text-foreground-500 hover:text-foreground"
               >
                 <Icon icon="mdi:twitter" height={22} />
               </Link>
               <Link
-                href="#"
+                href="https://github.com/gopaladhikari"
                 aria-label="GitHub"
+                target="_blank"
                 className="text-foreground-500 hover:text-foreground"
               >
                 <Icon icon="mdi:github" height={22} />
               </Link>
               <Link
-                href="#"
+                href="https://www.linkedin.com/in/gopuadks/"
                 aria-label="LinkedIn"
+                target="_blank"
                 className="text-foreground-500 hover:text-foreground"
               >
                 <Icon icon="mdi:linkedin" height={22} />
@@ -138,41 +128,27 @@ export function Footer() {
             <p className="text-foreground-500 text-sm mb-4">
               Get product updates and tips. No spam.
             </p>
-            <form
-              onSubmit={handleSubmit}
-              className="flex flex-col gap-3"
-              noValidate
-            >
+            <Form className="w-full max-w-xs" onSubmit={handleSubmit}>
               <Input
-                type="email"
-                label="Email address"
+                isRequired
+                label="Email"
                 labelPlacement="outside"
+                name="email"
                 placeholder="you@example.com"
-                value={email}
-                onValueChange={setEmail}
-                isInvalid={!!error}
-                errorMessage={error || undefined}
-                radius="sm"
+                type="email"
               />
               <Button
                 type="submit"
                 color="primary"
-                radius="sm"
                 isLoading={loading}
-                endContent={<Icon icon="tabler:send" height={18} />}
+                isDisabled={loading}
               >
-                Subscribe
+                {loading ? "Submitting..." : "Submit"}
               </Button>
-              {success && (
-                <p
-                  className="text-success text-sm"
-                  role="status"
-                  aria-live="polite"
-                >
-                  {success}
-                </p>
-              )}
-            </form>
+
+              {error && <p className="text-red-500">{error}</p>}
+              {success && <p className="text-green-500">{success}</p>}
+            </Form>
           </div>
         </div>
 
