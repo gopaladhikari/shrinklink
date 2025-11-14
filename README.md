@@ -4,7 +4,7 @@
 
 Shorten long URLs in seconds, share them anywhere, and track how many times they're clicked.
 
-**Live Demo**: [https://shrinklink-orcin.vercel.app](https://shrinklink-orcin.vercel.app)
+**Live Demo**: [https://gopuadks-shrinkllink.netlify.app/](https://gopuadks-shrinkllink.netlify.app/)
 
 ---
 
@@ -31,18 +31,8 @@ Shorten long URLs in seconds, share them anywhere, and track how many times they
 | ---------- | ---------------------------------------------- |
 | Framework  | [Next.js 16+ (App Router)](https://nextjs.org) |
 | UI Library | [HeroUI](https://heroui.com) + Tailwind CSS    |
-| Database   | MongoDB – Local dev                            |
-| Deployment | [Vercel](https://vercel.com)                   |
+| Database   | MongoDB                                        |
+| Deployment | [Netlify](hhttps://www.netlify.com/)           |
 | Styling    | Tailwind CSS + HeroUI Components               |
 
 ---
-
-## 🚀 Getting Started
-
-### 1. Clone & Install
-
-```bash
-git clone git@github.com:gopaladhikari/shrinklink.git
-cd shrinklink
-npm install
-```
