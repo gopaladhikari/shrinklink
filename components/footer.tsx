@@ -15,8 +15,6 @@ export function Footer() {
 
     const { email } = Object.fromEntries(new FormData(e.currentTarget));
 
-    console.log(email);
-
     try {
       setLoading(true);
       await new Promise((r) => setTimeout(r, 900));

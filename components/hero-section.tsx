@@ -4,6 +4,7 @@ import { Button } from "@heroui/react";
 import { Icon } from "@iconify/react";
 import { FadeInImage } from "./fade-in-image";
 import Link from "next/link";
+import { URLShortForm } from "./URL-short-form";
 
 export function HeroSection() {
   return (
@@ -35,35 +36,8 @@ export function HeroSection() {
               @gopuadks
             </Button>
           </div>
+          <URLShortForm />
           <p className="text-default-500 text-center leading-7 font-normal sm:w-[466px] sm:text-[18px]"></p>
-          <div className="flex flex-col items-center justify-center gap-6 sm:flex-row">
-            <Button
-              className="bg-default-foreground text-small text-background h-10 w-[163px] px-[16px] py-[10px] leading-5 font-medium"
-              radius="full"
-              as={Link}
-              href="/signup"
-            >
-              Get Started
-            </Button>
-            <Button
-              className="border-default-100 text-small h-10 w-[163px] border-1 px-[16px] py-[10px] leading-5 font-medium"
-              endContent={
-                <span className="bg-default-100 pointer-events-none flex h-[22px] w-[22px] items-center justify-center rounded-full">
-                  <Icon
-                    className="text-default-500 [&>path]:stroke-[1.5]"
-                    icon="solar:arrow-right-linear"
-                    width={16}
-                  />
-                </span>
-              }
-              radius="full"
-              variant="bordered"
-              as={Link}
-              href="/sign-in"
-            >
-              See our plans
-            </Button>
-          </div>
         </div>
         <div className="pointer-events-none absolute inset-0 top-[-25%] z-10 scale-150 select-none sm:scale-125">
           <FadeInImage

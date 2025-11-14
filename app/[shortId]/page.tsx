@@ -21,7 +21,6 @@ export default async function Page({ params }: Params) {
 
   if (res.status === 302) {
     const location = res.headers.get("location");
-    console.log(location);
     redirect(location!);
   }
 
