@@ -2,13 +2,13 @@ import { connectToDb } from "@/lib/db";
 import { URLS } from "@/models/urls.schema";
 import { NextResponse } from "next/server";
 
-export async function GET(_req: Request, ctx: RouteContext<"/api/[shortId]">) {
+export async function GET(_req: Request, ctx: RouteContext<"/api/[code]">) {
   try {
-    const { shortId } = await ctx.params;
+    const { code } = await ctx.params;
 
     await connectToDb();
 
-    const url = await URLS.findOne({ shortId });
+    const url = await URLS.findOne({ code });
 
     if (!url)
       return NextResponse.json(

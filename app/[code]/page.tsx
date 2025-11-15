@@ -8,14 +8,14 @@ export const metadata: Metadata = {
 
 type Params = {
   params: Promise<{
-    shortId: string;
+    code: string;
   }>;
 };
 
 export default async function Page({ params }: Params) {
-  const { shortId } = await params;
+  const { code } = await params;
 
-  const res = await fetch(`http://localhost:3000/api/${shortId}`, {
+  const res = await fetch(`http://localhost:3000/api/${code}`, {
     redirect: "manual",
   });
 

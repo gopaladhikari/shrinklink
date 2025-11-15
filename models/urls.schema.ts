@@ -1,23 +1,30 @@
-import mongoose from "mongoose";
+import mongoose, { type Model } from "mongoose";
 
-interface Url {
+interface IURL {
   orginalUrl: string;
-  shortId: string;
+  code: string;
+  password: string;
+  expiresAt: Date;
+  clicks: number;
+  userId: string;
+  createdAt: Date;
 }
 
-const UrlSchema = new mongoose.Schema<Url>({
-  orginalUrl: {
-    type: String,
-    required: true,
+const URLSchema = new mongoose.Schema<IURL>(
+  {
+    code: { type: String, required: true, unique: true },
+    orginalUrl: { type: String, required: true, unique: true },
+    password: { type: String },
+    expiresAt: { type: Date },
+    clicks: { type: Number, default: 0 },
+    userId: { type: String },
   },
+  {
+    timestamps: true,
+  }
+);
 
-  shortId: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-});
-
-const URLS = mongoose.models.URLS || mongoose.model<Url>("URLS", UrlSchema);
+const URLS: Model<IURL> =
+  mongoose.models.URL || mongoose.model("URL", URLSchema);
 
 export { URLS };
