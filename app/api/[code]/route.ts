@@ -10,15 +10,7 @@ export async function GET(_req: Request, ctx: RouteContext<"/api/[code]">) {
 
     const url = await URLS.findOne({ code });
 
-    if (!url)
-      return NextResponse.json(
-        {
-          message: "URL not found",
-        },
-        {
-          status: 404,
-        }
-      );
+    if (!url) throw new Error("URL not found");
 
     return NextResponse.redirect(url.orginalUrl, {
       status: 302,

@@ -17,5 +17,9 @@ export default async function Page({ params }: Params<"code">) {
   if (res.status === 302) {
     const location = res.headers.get("location") as string;
     redirect(location);
-  } else throw new Error("Something went wrong");
+  } else {
+    const body = await res.json();
+
+    throw new Error(body.message);
+  }
 }
