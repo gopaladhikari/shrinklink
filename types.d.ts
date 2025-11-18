@@ -6,8 +6,14 @@ declare global {
     conn: Connection | null;
   };
 
-  interface Params<T> {
+  interface Params<T = string> {
     params: Promise<Record<T, "string">>;
+  }
+
+  namespace NodeJS {
+    interface ProcessEnv {
+      MONGODB_URI: string;
+    }
   }
 }
 
