@@ -1,109 +1,122 @@
 "use client";
 
 import { useState } from "react";
-import { Form, Input, Button, Link } from "@heroui/react";
+import { Form, Button, Link, addToast } from "@heroui/react";
 import { Icon } from "@iconify/react";
+import QRCode from "react-qr-code";
 
 export function URLShortForm() {
-  const [error, setErrors] = useState<Record<string, string>>({});
   const [url, setUrl] = useState("");
-  const [shortId, setShortId] = useState("");
+
+  const [shortUrl, setShortUrl] = useState("");
   const [loading, setLoading] = useState(false);
-  const [inputKey, setInputKey] = useState(0);
+  const [error, setError] = useState("");
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!url) {
-      setErrors({ url: "URL is required" });
-      return;
-    }
-
-    setErrors({});
-    setLoading(true);
-
     try {
-      const res = await fetch("/api/generate", {
+      setLoading(true);
+      const res = await fetch("/api/shorten", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ orginalUrl: url }),
+        body: JSON.stringify({ url }),
       });
 
-      if (!res.ok) {
-        setLoading(false);
-        setErrors({ url: "URL is required" });
-        return;
-      }
-
       const data = await res.json();
-      setLoading(false);
 
-      setShortId(data.shortId);
+      if (!res.ok) throw new Error(data.message);
+
+      const code = data.code;
+
+      const currentUrl = location.href;
+
+      setShortUrl(`${currentUrl}url/${code}`);
     } catch (error) {
+      setError((error as Error).message);
+    } finally {
       setLoading(false);
-      setErrors({ url: (error as Error).message });
     }
   };
 
   const pasteFromClipboard = async () => {
     const text = await navigator.clipboard.readText();
     if (!text) {
-      setErrors({ url: "URL is required" });
+      setError("URL is required");
       return;
     }
     setUrl(text);
-    setErrors({});
+    setError("");
+  };
 
-    setInputKey((k) => k + 1);
+  const copyToClipBoard = async () => {
+    await navigator.clipboard.writeText(shortUrl);
+
+    addToast({
+      title: "URL copied to clipboard",
+      color: "success",
+    });
   };
 
   return (
-    <div className="w-full">
-      <Form
-        className="w-full flex"
-        onSubmit={onSubmit}
-        validationErrors={error}
-      >
-        <Input
-          key={inputKey}
-          label="Paste the URL to be shortened"
-          labelPlacement="outside"
-          type="url"
-          name="url"
-          value={url}
-          onValueChange={setUrl}
-          placeholder="Enter the URL here"
-          validate={(v) => (v ? true : "URL is required")}
-          endContent={
-            <button type="button" onClick={pasteFromClipboard}>
-              <Icon icon="mdi:content-paste" />
-            </button>
-          }
-        />
+    <div className="w-full space-y-4">
+      <Form className="w-full flex" onSubmit={onSubmit}>
+        <label
+          htmlFor="url"
+          className="block text-sm font-medium text-foreground"
+        >
+          Paste the URL to be shortened
+        </label>
+
+        <div className="flex w-full bg-white/60 p-2 rounded-2xl">
+          <input
+            type="url"
+            name="url"
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+            placeholder="Enter the URL here"
+            className="w-full focus-within:outline-none px-2"
+          />
+          <button
+            type="button"
+            onClick={pasteFromClipboard}
+            className="cursor-pointer"
+          >
+            <Icon icon="mdi:content-paste" />
+          </button>
+        </div>
         <Button type="submit" isLoading={loading}>
           Submit
         </Button>
       </Form>
 
-      {shortId && (
-        <div className="mt-4">
-          <Link
-            href={`${
-              process.env.NODE_ENV === "development"
-                ? "http://localhost:3000/"
-                : "https://gopuadks-shrinkllink.netlify.app/"
-            }${shortId}`}
-            className="text-default-500 text-center leading-7 font-normal sm:w-[466px] sm:text-[18px]"
-          >
-            {process.env.NODE_ENV === "development"
-              ? "http://localhost:3000/"
-              : "https://gopuadks-shrinkllink.netlify.app/"}
-            {shortId}
+      {shortUrl && (
+        <div className="flex items-center gap-4">
+          Short Url:{" "}
+          <Link href={shortUrl} target="_blank">
+            {shortUrl}
           </Link>
+          <Button
+            type="button"
+            variant="faded"
+            size="sm"
+            title="copy to clipboard"
+            onPress={copyToClipBoard}
+          >
+            <Icon icon="mdi:content-copy" />
+          </Button>
         </div>
       )}
+
+      {shortUrl && (
+        <div className="mt-4">
+          <QRCode size={250} value={shortUrl} />
+        </div>
+      )}
+
+      {error && <p className="text-red-500">{error}</p>}
     </div>
   );
 }

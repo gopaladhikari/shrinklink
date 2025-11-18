@@ -6,13 +6,7 @@ export const metadata: Metadata = {
   description: "Redirecting...",
 };
 
-type Params = {
-  params: Promise<{
-    code: string;
-  }>;
-};
-
-export default async function Page({ params }: Params) {
+export default async function Page({ params }: Params<"code">) {
   const { code } = await params;
 
   const res = await fetch(`http://localhost:3000/api/${code}`, {
@@ -24,5 +18,9 @@ export default async function Page({ params }: Params) {
     redirect(location!);
   }
 
-  return <main></main>;
+  return (
+    <section>
+      <h1>Redirecting ...</h1>
+    </section>
+  );
 }

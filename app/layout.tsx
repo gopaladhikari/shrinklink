@@ -70,7 +70,7 @@ export default function RootLayout({
       <body suppressHydrationWarning className="antialiased">
         <Providers>
           <Menu />
-          {children}
+          <main>{children}</main>
           <Footer />
         </Providers>
       </body>

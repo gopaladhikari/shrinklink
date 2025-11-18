@@ -8,8 +8,8 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <main>
+    <section>
       <SignUpForm />
-    </main>
+    </section>
   );
 }

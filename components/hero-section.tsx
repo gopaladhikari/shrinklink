@@ -6,10 +6,12 @@ import { FadeInImage } from "./fade-in-image";
 import Link from "next/link";
 import { URLShortForm } from "./URL-short-form";
 
+// TODO: Improve UI
+
 export function HeroSection() {
   return (
     <div className="bg-background relative flex h-dvh w-full flex-col overflow-hidden">
-      <section className="container mx-auto flex flex-1 flex-col items-center justify-center overflow-hidden px-8">
+      <div className="container mx-auto flex flex-1 flex-col items-center justify-center overflow-hidden px-8">
         <div className="z-20 flex flex-col items-center justify-center gap-[18px] sm:gap-6">
           <div className="text-center text-[clamp(40px,10vw,44px)] leading-[1.2] font-bold tracking-tighter sm:text-[64px]">
             <div className="bg-hero-section-title bg-clip-text">
@@ -46,7 +48,7 @@ export function HeroSection() {
             fill
           />
         </div>
-      </section>
+      </div>
     </div>
   );
 }
