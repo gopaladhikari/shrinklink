@@ -28,7 +28,7 @@ export default function ErrorPage({
   };
 
   return (
-    <div className="min-h-screen bg-linear-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-linear-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
       <motion.div
         initial="hidden"
         animate="show"
@@ -84,7 +84,7 @@ export default function ErrorPage({
           className="bg-gray-50 p-4 text-center text-sm text-gray-500"
           variants={item}
         >
-          <p>Error Code: 404 | Page Not Found</p>
+          <p>Error Code: {error.digest}</p>
         </motion.div>
       </motion.div>
     </div>
