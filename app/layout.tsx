@@ -2,61 +2,45 @@ import type { Metadata } from "next";
 import { Providers } from "./providers";
 import { Menu } from "@/components/navbar";
 import { Footer } from "@/components/footer";
+import { site } from "@/constants";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "ShrinkLink - Shorten Your URLs",
+    default: site.name,
     template: "%s | ShrinkLink",
   },
-  description:
-    "A fast, minimal URL shortener. Shorten long links in seconds and track clicks.",
-  keywords:
-    "url shortener, link shortener, shorten url, bitly alternative, nextjs project",
-  authors: [{ name: "ShrinkLink" }],
-  creator: "ShrinkLink",
-  publisher: "ShrinkLink",
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
+  description: site.description,
+  keywords: site.keywords,
+  authors: [{ name: site.author }],
+  creator: site.author,
+  publisher: site.author,
 
-  // Open Graph (Facebook, LinkedIn, etc.)
   openGraph: {
-    title: "ShrinkLink - Shorten Your URLs",
-    description: "Shorten, share, and track your links with ShrinkLink.",
-    url: "https://shrinklink-orcin.vercel.app",
-    siteName: "ShrinkLink",
+    title: site.name,
+    description: site.description,
+    url: site.url,
+    siteName: site.name,
     images: [
       {
-        url: "https://shrinklink-orcin.vercel.app/og-image.jpg",
+        url: `${site.url}/og-image.jpg`,
         width: 1200,
         height: 630,
-        alt: "ShrinkLink - URL Shortener",
+        alt: site.name,
       },
     ],
     locale: "en_US",
     type: "website",
   },
 
-  // Twitter Card
   twitter: {
     card: "summary_large_image",
-    title: "ShrinkLink - Shorten Your URLs",
-    description: "A minimal, fast URL shortener built with Next.js.",
-    images: ["https://shrinklink-orcin.vercel.app/og-image.jpg"],
-    creator: "@gopuadks",
+    title: site.name,
+    description: site.description,
+    images: [`${site.url}/og-image.jpg`],
+    creator: site.author,
   },
 
-  // Icons
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon-16x16.png",
-    apple: "/apple-touch-icon.png",
-  },
-
-  // Manifest (PWA support - optional)
   manifest: "/site.webmanifest",
 };
 

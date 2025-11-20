@@ -8,6 +8,7 @@ declare global {
 
   interface Params<T = string> {
     params: Promise<Record<T, "string">>;
+    searchParams: Promise<URLSearchParams>;
   }
 
   namespace NodeJS {

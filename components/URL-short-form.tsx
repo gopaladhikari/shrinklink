@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Form, Button, Link, addToast } from "@heroui/react";
 import { Icon } from "@iconify/react";
 import QRCode from "react-qr-code";
+import { MESSAGES } from "@/constants";
 
 export function URLShortForm() {
   const [url, setUrl] = useState("");
@@ -44,7 +45,7 @@ export function URLShortForm() {
   const pasteFromClipboard = async () => {
     const text = await navigator.clipboard.readText();
     if (!text) {
-      setError("URL is required");
+      setError(MESSAGES.ERROR.URL_REQUIRED);
       return;
     }
     setUrl(text);
@@ -52,12 +53,20 @@ export function URLShortForm() {
   };
 
   const copyToClipBoard = async () => {
-    await navigator.clipboard.writeText(shortUrl);
+    try {
+      await navigator.clipboard.writeText(shortUrl);
 
-    addToast({
-      title: "URL copied to clipboard",
-      color: "success",
-    });
+      addToast({
+        title: MESSAGES.SUCCESS.URL_COPIED,
+        color: "success",
+      });
+    } catch (error) {
+      addToast({
+        title: MESSAGES.ERROR.FAILED_TO_COPY,
+        color: "danger",
+        description: (error as Error).message,
+      });
+    }
   };
 
   return (

@@ -1,6 +1,7 @@
 import { connectToDb } from "@/lib/db";
 import { URLS } from "@/models/urls.schema";
 import { NextResponse } from "next/server";
+import { MESSAGES } from "@/constants";
 
 export async function GET(_req: Request, ctx: RouteContext<"/api/[code]">) {
   try {
@@ -10,7 +11,7 @@ export async function GET(_req: Request, ctx: RouteContext<"/api/[code]">) {
 
     const url = await URLS.findOne({ code });
 
-    if (!url) throw new Error("URL not found");
+    if (!url) throw new Error(MESSAGES.ERROR.URL_NOT_FOUND);
 
     return NextResponse.redirect(url.orginalUrl, {
       status: 302,

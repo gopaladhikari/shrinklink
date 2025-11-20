@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { nanoid } from "nanoid";
 import { connectToDb } from "@/lib/db";
 import { URLS } from "@/models/urls.schema";
+import { MESSAGES } from "@/constants";
 
 export async function POST(req: Request) {
   try {
@@ -18,7 +19,7 @@ export async function POST(req: Request) {
     ).lean();
 
     return NextResponse.json({
-      message: "Url shortened successfully",
+      message: MESSAGES.SUCCESS.URL_SHORTENED,
       ...url,
     });
   } catch (error) {

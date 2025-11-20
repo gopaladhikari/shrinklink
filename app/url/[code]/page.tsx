@@ -1,4 +1,4 @@
-import { DOMAIN } from "@/lib/constants";
+import { DOMAIN } from "@/constants";
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
