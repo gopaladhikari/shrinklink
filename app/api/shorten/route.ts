@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { nanoid } from "nanoid";
 import { connectToDb } from "@/lib/db";
-import { URLS } from "@/models/urls.schema";
+import { URL } from "@/models/urls.schema";
 import { MESSAGES } from "@/constants";
 
 export async function POST(req: Request) {
@@ -12,7 +12,7 @@ export async function POST(req: Request) {
 
     const code = nanoid(6);
 
-    const url = await URLS.findOneAndUpdate(
+    const url = await URL.findOneAndUpdate(
       { orginalUrl: body.url },
       { code, orginalUrl: body.url },
       { upsert: true, new: true }

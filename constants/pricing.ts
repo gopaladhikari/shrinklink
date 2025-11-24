@@ -1,0 +1,51 @@
+export const pricing = {
+  features: [
+    "Shorten URLs",
+    "Basic click count",
+    "QR code",
+    "Detailed analytics (countries, devices, referrers, click timeline)",
+    "Password-protected links",
+    "Link expiration (auto-delete after X days)",
+    "Branded short domain (yourdomain.com instead of shrinklink.app)",
+    "Remove “Powered by ShrinkLink” branding",
+    "Priority support + API access",
+    "Monthly link limit",
+    "Click data retention",
+  ],
+  free: {
+    name: "Free",
+    price: 0,
+    isFeature: [
+      "Yes (unlimited)",
+      "Yes (public page shows total clicks)",
+      "Yes",
+      "Only last 7 days",
+      "No",
+      "No",
+      "No",
+      "No",
+      "No",
+      "100 active links",
+      "30 days",
+    ],
+  },
+  premium: {
+    name: "Premium",
+    price: 9,
+    isFeature: [
+      "Yes (unlimited)",
+      "Yes",
+      "Yes",
+      "Unlimited history",
+      "Yes",
+      "Yes",
+      "Yes (connect custom domain)",
+      "Yes",
+      "Yes",
+      "Unlimited",
+      "Forever",
+    ],
+  },
+};
+
+export type Pricing = typeof pricing;

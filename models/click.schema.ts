@@ -1,20 +1,34 @@
 import mongoose, { type Model } from "mongoose";
 
 interface IClick {
-  urlId: string;
+  urlId: mongoose.Types.ObjectId;
   timestamp: Date;
-  ip: string;
-  country: string;
-  device: string;
+  ipHash?: string;
+  country?: string;
+  city?: string;
+  device?: string;
+  os?: string;
+  browser?: string;
+  referrer?: string;
 }
 
 const ClickSchema = new mongoose.Schema<IClick>(
   {
-    urlId: { type: String, required: true },
+    urlId: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      unique: true,
+      index: true,
+      ref: "URL",
+    },
     timestamp: { type: Date, default: Date.now },
-    ip: { type: String },
+    ipHash: { type: String },
     country: { type: String },
+    city: { type: String },
     device: { type: String },
+    os: { type: String },
+    browser: { type: String },
+    referrer: { type: String },
   },
   {
     timestamps: true,

@@ -13,3 +13,5 @@ export const site = {
     "Short URL service",
   ],
 };
+
+export type Site = typeof site;

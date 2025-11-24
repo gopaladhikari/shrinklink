@@ -1,7 +1,7 @@
 import mongoose, { type Model } from "mongoose";
 
 interface ISubscription {
-  userId: string;
+  userId: mongoose.Types.ObjectId;
   stripeSubscriptionId: string;
   status: string;
   currentPeriodEnd: Date;
@@ -9,7 +9,13 @@ interface ISubscription {
 
 const SubscriptionSchema = new mongoose.Schema<ISubscription>(
   {
-    userId: { type: String, required: true, unique: true },
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+      unique: true,
+      index: true,
+    },
     stripeSubscriptionId: { type: String, required: true },
     status: { type: String, required: true },
     currentPeriodEnd: { type: Date, required: true },

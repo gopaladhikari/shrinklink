@@ -2,29 +2,37 @@ import mongoose, { type Model } from "mongoose";
 
 interface IURL {
   orginalUrl: string;
-  code: string;
-  password: string;
-  expiresAt: Date;
-  clicks: number;
-  userId: string;
-  createdAt: Date;
+  shortCode: string;
+  userId?: mongoose.Types.ObjectId;
+
+  // Premium-only features
+  customAlias?: string;
+  password?: Date;
+  expiresAt?: number;
+
+  isBranded?: boolean;
 }
 
 const URLSchema = new mongoose.Schema<IURL>(
   {
-    code: { type: String, required: true, unique: true },
+    shortCode: {
+      type: String,
+      required: true,
+      unique: true,
+    },
     orginalUrl: { type: String, required: true, unique: true },
     password: { type: String },
     expiresAt: { type: Date },
-    clicks: { type: Number, default: 0 },
-    userId: { type: String },
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    customAlias: { type: String },
+    isBranded: { type: Boolean, default: false },
   },
   {
     timestamps: true,
   }
 );
 
-const URLS: Model<IURL> =
+const URL: Model<IURL> =
   mongoose.models.URL || mongoose.model("URL", URLSchema);
 
-export { URLS };
+export { URL };
