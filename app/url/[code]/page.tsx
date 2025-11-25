@@ -1,4 +1,4 @@
-import { DOMAIN } from "@/constants";
+import { site } from "@/constants";
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default async function Page({ params }: Params<"code">) {
   const { code } = await params;
 
-  const res = await fetch(`${DOMAIN}/api/${code}`, {
+  const res = await fetch(`${site.url}/api/${code}`, {
     redirect: "manual",
   });
 

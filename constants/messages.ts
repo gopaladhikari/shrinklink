@@ -1,4 +1,4 @@
-export const MESSAGES = {
+export const messages = {
   SUCCESS: {
     URL_SHORTENED: "Your URL has been shortened successfully!",
     URL_COPIED: "Short link copied to clipboard!",
@@ -23,4 +23,6 @@ export const MESSAGES = {
   CONFIRM: {
     DELETE_LINK: "Are you sure you want to delete this link?",
   },
-} as const;
+};
+
+export type Messages = typeof messages;
