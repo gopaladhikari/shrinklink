@@ -1,4 +1,4 @@
-export default async function Page() {
+export function Footer() {
   return (
     <main>
       <h1>Hello world</h1>
